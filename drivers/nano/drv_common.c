@@ -72,7 +72,7 @@ void SysTick_Handler(void)
 }
 
 /**
- * This function will initial STM32 board.
+ * This function will initial gd32 board.
  */
 void hw_board_init(char *clock_src, int32_t clock_src_freq, int32_t clock_target_freq)
 {

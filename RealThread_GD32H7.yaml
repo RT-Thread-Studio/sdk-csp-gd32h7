@@ -2,7 +2,7 @@
 vendor: RealThread
 dvendor: GigaDevice
 name: GD32H7
-version: 0.1.3
+version: 1.0.0
 yaml_version: 1
 type: Chip_Support_Packages
 family_name: GD32

@@ -87,10 +87,10 @@ void hw_board_init(char *clock_src, int32_t clock_src_freq, int32_t clock_target
 #endif
 
     /* Enable IChace */
-    rt_hw_cpu_icache_enable();
+    SCB_EnableICache();
 
     /* Enable DChace */
-    rt_hw_cpu_dcache_enable();
+    SCB_EnableDCache();
 
     SystemClock_Config();
 

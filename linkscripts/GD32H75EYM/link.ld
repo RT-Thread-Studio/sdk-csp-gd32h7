@@ -37,8 +37,21 @@ SECTIONS
     *(.eh_frame)
     KEEP (*(.init))
     KEEP (*(.fini))
+    
+    . = ALIGN(4);
+    /* the symbol '_etext' will be defined at the end of code section */
+    _etext = .;
+  } >FLASH
 
-    /* section information for finsh shell */
+  /* ro-data section, such as constant data */
+  .rodata :
+  {
+    . = ALIGN(4);
+    *(.rodata)
+    *(.rodata*)
+    . = ALIGN(4);
+    
+        /* section information for finsh shell */
     . = ALIGN(4);
     __fsymtab_start = .;
     KEEP(*(FSymTab))
@@ -54,18 +67,6 @@ SECTIONS
     __rt_init_start = .;
     KEEP(*(SORT(.rti_fn*)))
     __rt_init_end = .;
-    . = ALIGN(4);
-    
-    /* the symbol '_etext' will be defined at the end of code section */
-    _etext = .;
-  } >FLASH
-
-  /* ro-data section, such as constant data */
-  .rodata :
-  {
-    . = ALIGN(4);
-    *(.rodata)
-    *(.rodata*)
     . = ALIGN(4);
   } >FLASH
 
@@ -126,6 +127,15 @@ SECTIONS
     _edata = .;
   } > AXISRAM AT> FLASH
 
+  /* heap and stack space, must be initialized before the .bss */
+  .heap_stack :
+  {
+    . = ALIGN(8);
+    . = . + __stack_size;
+    PROVIDE( _sp = . ); 
+    . = ALIGN(8);
+  } > AXISRAM
+
   /* provide some necessary symbols for uninitialized data */
   . = ALIGN(4);
   .bss :
@@ -141,19 +151,6 @@ SECTIONS
     /* the symbol '_ebss' will be defined at the bss section end */
     _ebss = .;
     __bss_end = _ebss;
-  } > AXISRAM
-
-  /* heap and stack space */
-  .heap_stack :
-  {
-    . = ALIGN(8);
-    PROVIDE ( end = _ebss );
-    PROVIDE ( _end = _ebss );
-    . = . + __heap_size;
-    PROVIDE( _heap_end = . );
-    . = . + __stack_size;
-    PROVIDE( _sp = . ); 
-    . = ALIGN(8);
   } > AXISRAM
 
   _siitcmram = LOADADDR(.itcmram);

@@ -18,15 +18,6 @@
 
 /* reset Handler */
 Reset_Handler:
-    LDR     r1, =0x24000000
-    LDR     r2, =0x80000  /* 512K AXI SRAM */
-    MOV     r0, #0x00
-SRAM_INIT:
-	STM     r1!, {r0}
-	SUBS    r2, r2, #4
-	CMP     r2, #0x00
-	BNE     SRAM_INIT
-
   movs r1, #0
   b DataInit
 

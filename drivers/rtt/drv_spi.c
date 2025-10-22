@@ -423,9 +423,9 @@ static rt_ssize_t spixfer(struct rt_spi_device* device, struct rt_spi_message* m
         }
     }
 
-    LOG_D("%s transfer prepare and start", spi_drv->config->bus_name);
+    LOG_D("%s transfer prepare and start", spi_device->bus_name);
     LOG_D("%s sendbuf: %X, recvbuf: %X, length: %d",
-          spi_drv->config->bus_name,
+            spi_device->bus_name,
           (uint32_t)message->send_buf,
           (uint32_t)message->recv_buf, message->length);
 

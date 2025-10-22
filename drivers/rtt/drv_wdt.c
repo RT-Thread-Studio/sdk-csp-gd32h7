@@ -21,8 +21,8 @@
 #ifdef RT_USING_WDT
 
 /* User-configurable macros for WDT clock source and prescaler */
-/* Default select oscillator type: RCU_LXTAL */
-#define WDT_OSCI_TYPE              RCU_LXTAL
+/* Default select oscillator type: RCU_IRC32K */
+#define WDT_OSCI_TYPE              RCU_IRC32K
 
 /* Prescaler divider value (must match WDT_PSC_VALUE) */
 #define WDT_PSC_DIVIDER            256U
@@ -30,7 +30,7 @@
 #define WDT_PSC_VALUE              FWDGT_PSC_DIV256
 
 /* Derived values */
-#define WDT_CLOCK_FREQ             LXTAL_VALUE
+#define WDT_CLOCK_FREQ             IRC32K_VALUE
 
 #define WDT_TICK_HZ                (WDT_CLOCK_FREQ / WDT_PSC_DIVIDER)
 #define WDT_MAX_RELOAD_VALUE       0xfffU

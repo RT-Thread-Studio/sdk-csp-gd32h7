@@ -810,7 +810,7 @@ series:
         default: '1'
       - id: IRAM1
         start: '0x24000000'
-        size: '0x2000'
+        size: '0x80000'
         init: '0'
         default: '1'
       compiler:

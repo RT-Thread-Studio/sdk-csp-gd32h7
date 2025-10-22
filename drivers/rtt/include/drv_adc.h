@@ -6,6 +6,7 @@
  * Change Logs:
  * Date           Author       Notes
  * 2022-05-03     BruceOu      first implementation
+ * 2025-10-22     kurisaw           optimize multi-channel GPIO configuration
  */
 
 #ifndef __DRV_ADC_H__
@@ -20,12 +21,14 @@
 extern "C" {
 #endif
 
-/* gd32 adc dirver class */
+#define MAX_EXTERN_ADC_CHANNEL 20
+
+/* gd32 adc driver class */
 struct gd32_adc
 {
     uint32_t adc_periph;
     rcu_periph_enum adc_clk;
-    rt_base_t adc_pins[16];
+    const char *adc_pins[MAX_EXTERN_ADC_CHANNEL];
     struct rt_adc_device *adc;
     char *device_name;
 };
@@ -35,4 +38,3 @@ struct gd32_adc
 #endif
 
 #endif /* __DRV_ADC_H__ */
-

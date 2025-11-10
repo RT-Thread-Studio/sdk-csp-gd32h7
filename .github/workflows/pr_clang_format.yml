@@ -26,7 +26,6 @@ permissions:
 
 jobs:
   format-code:
-    if: |
     runs-on: ubuntu-latest
 
     steps:

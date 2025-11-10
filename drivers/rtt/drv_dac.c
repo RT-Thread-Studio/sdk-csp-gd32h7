@@ -37,10 +37,10 @@ typedef struct
 } DAC_INIT_STATUS;
 
 static DAC_INIT_STATUS dac_init_status[] = {
-#if defined (DAC0)
-    {DAC0, RT_FALSE},
-#elif defined (DAC1)
-    {DAC1, RT_FALSE},
+#if defined(DAC0)
+    { DAC0, RT_FALSE },
+#elif defined(DAC1)
+    { DAC1, RT_FALSE },
 #endif
 };
 
@@ -199,7 +199,7 @@ static int drv_dac_init(void)
 
         /* Register DAC device */
         if (rt_hw_dac_register(&gd32_dac_obj[i].dac_device, gd32_dac_obj[i].name,
-                              &drv_ops, RT_NULL) == RT_EOK)
+                               &drv_ops, RT_NULL) == RT_EOK)
         {
             LOG_D("%s register success (channel %d)",
                   gd32_dac_obj[i].name, gd32_dac_obj[i].channel);

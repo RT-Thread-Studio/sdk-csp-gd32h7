@@ -66,14 +66,14 @@ typedef struct
 } TIMER_INIT_STATUS;
 
 static TIMER_INIT_STATUS timer_init_status[] = {
-    {TIMER0, RT_FALSE},
-    {TIMER1, RT_FALSE},
-    {TIMER2, RT_FALSE},
-    {TIMER3, RT_FALSE},
-    {TIMER4, RT_FALSE},
-    {TIMER5, RT_FALSE},
-    {TIMER6, RT_FALSE},
-    {TIMER7, RT_FALSE},
+    { TIMER0, RT_FALSE },
+    { TIMER1, RT_FALSE },
+    { TIMER2, RT_FALSE },
+    { TIMER3, RT_FALSE },
+    { TIMER4, RT_FALSE },
+    { TIMER5, RT_FALSE },
+    { TIMER6, RT_FALSE },
+    { TIMER7, RT_FALSE },
 };
 
 static void gd32_pwm_init(struct gd32_pwm *gd32_pwm)
@@ -144,9 +144,9 @@ static rt_err_t drv_pwm_get(struct gd32_pwm *pwm_dev, struct rt_pwm_configuratio
 
     chxcv = timer_channel_capture_value_register_read(pwm_dev->timer_periph, configuration->channel);
     /* Convert nanosecond to frequency and duty cycle. 1s = 1 * 1000 * 1000 * 1000 ns */
-    tim_clock             /= 1000000UL;
-    configuration->period  = (TIMER_CAR(pwm_dev->timer_periph) + 1) * (psc + 1) * 1000UL / tim_clock;
-    configuration->pulse   = (chxcv + 1) * (psc + 1) * 1000UL / tim_clock;
+    tim_clock /= 1000000UL;
+    configuration->period = (TIMER_CAR(pwm_dev->timer_periph) + 1) * (psc + 1) * 1000UL / tim_clock;
+    configuration->pulse = (chxcv + 1) * (psc + 1) * 1000UL / tim_clock;
 
     return RT_EOK;
 }
@@ -160,9 +160,9 @@ static rt_err_t drv_pwm_set(struct gd32_pwm *pwm_dev, struct rt_pwm_configuratio
 
     /* Convert nanosecond to frequency and duty cycle. 1s = 1 * 1000 * 1000 * 1000 ns */
     tim_clock /= 1000000UL;
-    period     = (unsigned long long)configuration->period * tim_clock / 1000ULL;
-    psc        = period / MAX_PERIOD + 1;
-    period     = period / psc;
+    period = (unsigned long long)configuration->period * tim_clock / 1000ULL;
+    psc = period / MAX_PERIOD + 1;
+    period = period / psc;
 
     timer_prescaler_config(pwm_dev->timer_periph, psc - 1, TIMER_PSC_RELOAD_NOW);
 
@@ -227,20 +227,20 @@ static void timer_initialize(uint32_t timer_periph)
         if (timer_init_status[i].timer_periph == timer_periph && !timer_init_status[i].initialized)
         {
             /* TIMER configuration */
-            timer_initpara.prescaler         = 119;
-            timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
-            timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-            timer_initpara.period            = 15999;
-            timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
+            timer_initpara.prescaler = 119;
+            timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
+            timer_initpara.counterdirection = TIMER_COUNTER_UP;
+            timer_initpara.period = 15999;
+            timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
             timer_initpara.repetitioncounter = 0;
             timer_init(timer_periph, &timer_initpara);
 
             /* CHX configuration in PWM mode */
-            timer_ocintpara.outputstate  = TIMER_CCX_ENABLE;
+            timer_ocintpara.outputstate = TIMER_CCX_ENABLE;
             timer_ocintpara.outputnstate = TIMER_CCXN_DISABLE;
-            timer_ocintpara.ocpolarity   = TIMER_OC_POLARITY_HIGH;
-            timer_ocintpara.ocnpolarity  = TIMER_OCN_POLARITY_HIGH;
-            timer_ocintpara.ocidlestate  = TIMER_OC_IDLE_STATE_LOW;
+            timer_ocintpara.ocpolarity = TIMER_OC_POLARITY_HIGH;
+            timer_ocintpara.ocnpolarity = TIMER_OCN_POLARITY_HIGH;
+            timer_ocintpara.ocidlestate = TIMER_OC_IDLE_STATE_LOW;
             timer_ocintpara.ocnidlestate = TIMER_OCN_IDLE_STATE_LOW;
             timer_channel_output_config(gd32_pwm_obj[i].timer_periph, gd32_pwm_obj[i].channel, &timer_ocintpara);
 
@@ -248,11 +248,11 @@ static void timer_initialize(uint32_t timer_periph)
 
             /* Configure channel output */
             timer_channel_output_pulse_value_config(gd32_pwm_obj[i].timer_periph,
-                                                  gd32_pwm_obj[i].channel, 7999);
+                                                    gd32_pwm_obj[i].channel, 7999);
             timer_channel_output_mode_config(gd32_pwm_obj[i].timer_periph,
-                                           gd32_pwm_obj[i].channel, TIMER_OC_MODE_PWM0);
+                                             gd32_pwm_obj[i].channel, TIMER_OC_MODE_PWM0);
             timer_channel_output_shadow_config(gd32_pwm_obj[i].timer_periph,
-                                             gd32_pwm_obj[i].channel, TIMER_OC_SHADOW_DISABLE);
+                                               gd32_pwm_obj[i].channel, TIMER_OC_SHADOW_DISABLE);
 
             /* Enable timer */
             timer_primary_output_config(timer_periph, ENABLE);
@@ -278,7 +278,7 @@ static int drv_pwm_init(void)
 
         /* Register PWM device */
         if (rt_device_pwm_register(&gd32_pwm_obj[i].pwm_device, gd32_pwm_obj[i].name,
-                                  &drv_ops, RT_NULL) == RT_EOK)
+                                   &drv_ops, RT_NULL) == RT_EOK)
         {
             LOG_D("%s register success", gd32_pwm_obj[i].name);
         }

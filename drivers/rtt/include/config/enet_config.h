@@ -33,14 +33,12 @@ const struct enet_pin_config enet0_pins[] =
 };
 
 /* Clock output pin for PHY */
-const struct enet_pin_config enet_clock_pin =
-{
+const struct enet_pin_config enet_clock_pin = {
     "PA8", "AF0"  /* Clock output for PHY */
 };
 
 /* ENET configuration */
-const struct enet_config enet0_cfg =
-{
+const struct enet_config enet0_cfg = {
     .pins = enet0_pins,
     .pin_count = sizeof(enet0_pins) / sizeof(enet0_pins[0]),
     .enet_periph = ENET0,

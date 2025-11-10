@@ -1029,8 +1029,8 @@ static void eth_show_status(void)
 
     rt_kprintf("\n=== Device Status ===\n");
     rt_kprintf("PHY Mode: %s\n",
-               gd32_emac_device0.phy_mode == EMAC_PHY_AUTO ? "Auto" :
-               gd32_emac_device0.phy_mode == EMAC_PHY_10MBIT ? "10M" : "100M");
+               gd32_emac_device0.phy_mode == EMAC_PHY_AUTO ? "Auto" : gd32_emac_device0.phy_mode == EMAC_PHY_10MBIT ? "10M"
+                                                                                                                    : "100M");
 }
 
 static void eth_list_instance(void)

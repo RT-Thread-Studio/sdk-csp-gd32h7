@@ -2,7 +2,7 @@
 vendor: RealThread
 dvendor: GigaDevice
 name: GD32H7
-version: 1.0.0
+version: 2.0.0
 yaml_version: 1
 type: Chip_Support_Packages
 family_name: GD32
@@ -95,7 +95,7 @@ series:
         default: '1'
       - id: IRAM1
         start: '0x24000000'
-        size: '0xD0000'
+        size: '0x80000'
         init: '0'
         default: '1'
       compiler:
@@ -169,6 +169,7 @@ series:
         - SOC_SERIES_GD32H7xx  
         source_files:
         - drivers/rtt
+        - drivers/rtt/usb
     source_files:
       file:
       # SOC_SERIES_GD32H7xx
@@ -428,6 +429,7 @@ series:
         - SOC_SERIES_GD32H7xx  
         source_files:
         - drivers/rtt
+        - drivers/rtt/usb
     source_files:
       file:
       # SOC_SERIES_GD32H7xx
@@ -780,6 +782,7 @@ series:
         - SOC_SERIES_GD32H7xx  
         source_files:
         - drivers/rtt
+        - drivers/rtt/usb
     source_files:
       file:
       # SOC_SERIES_GD32H7xx
@@ -801,7 +804,7 @@ series:
     cpu_info:
       max_clock: '600000000'
     chips:
-    - chip_name: GD32H75EYM
+    - chip_name: GD32H75EYMJ7
       peripheral: {}
       memory:
       - id: IROM1
@@ -884,6 +887,7 @@ series:
         - SOC_SERIES_GD32H75E
         source_files:
         - drivers/rtt
+        - drivers/rtt/usb
     source_files:
       file:
       # SOC_SERIES_GD32H75E

@@ -51,7 +51,7 @@ static void gd32_dac_hw_init(struct gd32_dac *gd32_dac)
     rcu_periph_enum dac_periph;
 
     /* Get pin configuration */
-    if (get_pin_config(gd32_dac->pin_name, &dac_port, &dac_pin, &dac_periph) != RT_EOK)
+    if (get_pin_config(gd32_dac->pin_name, &dac_port, &dac_pin, &dac_periph) == -RT_ERROR)
     {
         LOG_E("Failed to get pin config for %s", gd32_dac->pin_name);
         return;

@@ -158,17 +158,17 @@ static void gd32_spi_init(struct gd32_spi *gd32_spi)
     rcu_periph_enum sck_periph, miso_periph, mosi_periph;
     rt_uint32_t pin_af;
 
-    if (get_pin_config(gd32_spi->sck_pin_name, &sck_port, &sck_pin, &sck_periph) != RT_EOK)
+    if (get_pin_config(gd32_spi->sck_pin_name, &sck_port, &sck_pin, &sck_periph) == -RT_ERROR)
     {
         return;
     }
 
-    if (get_pin_config(gd32_spi->miso_pin_name, &miso_port, &miso_pin, &miso_periph) != RT_EOK)
+    if (get_pin_config(gd32_spi->miso_pin_name, &miso_port, &miso_pin, &miso_periph) == -RT_ERROR)
     {
         return;
     }
 
-    if (get_pin_config(gd32_spi->mosi_pin_name, &mosi_port, &mosi_pin, &mosi_periph) != RT_EOK)
+    if (get_pin_config(gd32_spi->mosi_pin_name, &mosi_port, &mosi_pin, &mosi_periph) == -RT_ERROR)
     {
         return;
     }

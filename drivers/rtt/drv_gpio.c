@@ -4,13 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  *
  * Change Logs:
- * Date           Author            Notes
- * 2021-08-20     BruceOu           the first version
+ * Date           Author       Notes
+ * 2025-11-07     RealThread   the first version
  */
 
 #include <rtdevice.h>
 #include <rthw.h>
 #include <rtconfig.h>
+#include <stdlib.h>
 
 #ifdef RT_USING_PIN
 
@@ -273,12 +274,12 @@ int get_pin_config(const char *pin_name, uint32_t *port, uint32_t *pin, rcu_peri
 {
     if (pin_name == NULL || port == NULL || pin == NULL || clk == NULL)
     {
-        return -1;
+        return -RT_ERROR;
     }
 
     if (strlen(pin_name) < 3 || pin_name[0] != 'P')
     {
-        return -1;
+        return -RT_ERROR;
     }
 
     char port_letter = pin_name[1];
@@ -351,13 +352,13 @@ int get_pin_config(const char *pin_name, uint32_t *port, uint32_t *pin, rcu_peri
             break;
 #endif /* GPIOK */
         default:
-            return -1;
+            return -RT_ERROR;
     }
 
     int pin_num = atoi(pin_name + 2);
     if (pin_num < 0 || pin_num > 15)
     {
-        return -1;
+        return -RT_ERROR;
     }
     *pin = GPIO_PIN_0 << pin_num;
 
@@ -368,18 +369,18 @@ int pin_alternate_config(const char *alternate, uint32_t *af)
 {
     if (alternate == NULL || af == NULL)
     {
-        return -1;
+        return -RT_ERROR;
     }
 
-    if (strlen(alternate) != 3 || alternate[0] != 'A' || alternate[1] != 'F')
+    if (alternate[0] != 'A' || alternate[1] != 'F')
     {
-        return -1;
+        return -RT_ERROR;
     }
 
     int af_num = atoi(alternate + 2);
     if (af_num < 0 || af_num > 15)
     {
-        return -1;
+        return -RT_ERROR;
     }
 
     switch (af_num)
@@ -400,7 +401,7 @@ int pin_alternate_config(const char *alternate, uint32_t *af)
         case 13: *af = GPIO_AF_13; break;
         case 14: *af = GPIO_AF_14; break;
         case 15: *af = GPIO_AF_15; break;
-        default: return -1;
+        default: return -RT_ERROR;
     }
 
     return 0;

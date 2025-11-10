@@ -62,7 +62,7 @@ static void gd32_adc_gpio_init(rcu_periph_enum adc_clk, const char *pin_name)
     }
 
     /* Parse pin configuration */
-    if (get_pin_config(pin_name, &port, &pin, &gpio_periph) != RT_EOK)
+    if (get_pin_config(pin_name, &port, &pin, &gpio_periph) == -RT_ERROR)
     {
         LOG_E("Failed to get pin config for %s", pin_name);
         return;

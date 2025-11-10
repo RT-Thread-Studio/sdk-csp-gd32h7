@@ -186,12 +186,12 @@ static void gd32_i2c_gpio_init(const struct gd32_i2c_bus *i2c)
     rt_uint32_t pin_af;
     rcu_periph_enum scl_periph, sda_periph;
 
-    if (get_pin_config(i2c->scl_pin_name, &scl_port, &scl_pin, &scl_periph) != RT_EOK)
+    if (get_pin_config(i2c->scl_pin_name, &scl_port, &scl_pin, &scl_periph) == -RT_ERROR)
     {
         return;
     }
 
-    if (get_pin_config(i2c->sda_pin_name, &sda_port, &sda_pin, &sda_periph) != RT_EOK)
+    if (get_pin_config(i2c->sda_pin_name, &sda_port, &sda_pin, &sda_periph) == -RT_ERROR)
     {
         return;
     }

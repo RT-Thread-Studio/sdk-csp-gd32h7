@@ -82,7 +82,7 @@ static void gd32_pwm_init(struct gd32_pwm *gd32_pwm)
     rcu_periph_enum pwm_periph;
     rt_uint32_t pin_af;
 
-    if (get_pin_config(gd32_pwm->pin_name, &pwm_port, &pwm_pin, &pwm_periph) != RT_EOK)
+    if (get_pin_config(gd32_pwm->pin_name, &pwm_port, &pwm_pin, &pwm_periph) == -RT_ERROR)
     {
         return;
     }

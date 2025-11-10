@@ -62,7 +62,7 @@ static void gd32_adc_gpio_init(rcu_periph_enum adc_clk, const char *pin_name)
     }
 
     /* Parse pin configuration */
-    if (get_pin_config(pin_name, &port, &pin, &gpio_periph) != RT_EOK)
+    if (get_pin_config(pin_name, &port, &pin, &gpio_periph) == -RT_ERROR)
     {
         LOG_E("Failed to get pin config for %s", pin_name);
         return;
@@ -91,7 +91,7 @@ static void gd32_adc_gpio_init(rcu_periph_enum adc_clk, const char *pin_name)
  */
 static rt_err_t gd32_adc_enabled(struct rt_adc_device *device, rt_int8_t channel, rt_bool_t enabled)
 {
-    uint32_t         adc_periph;
+    uint32_t adc_periph;
     struct gd32_adc *adc = (struct gd32_adc *)device->parent.user_data;
 
     if (channel >= MAX_EXTERN_ADC_CHANNEL)
@@ -105,7 +105,7 @@ static rt_err_t gd32_adc_enabled(struct rt_adc_device *device, rt_int8_t channel
     if (enabled == ENABLE)
     {
 #if defined SOC_SERIES_GD32H7xx || defined SOC_SERIES_GD32H75E
-        /* Disable ADC first */ 
+        /* Disable ADC first */
         adc_disable(adc_periph);
 #endif
 
@@ -186,9 +186,9 @@ static rt_err_t gd32_adc_enabled(struct rt_adc_device *device, rt_int8_t channel
  */
 static rt_err_t gd32_adc_convert(struct rt_adc_device *device, rt_int8_t channel, rt_uint32_t *value)
 {
-    uint32_t         adc_periph;
-    uint32_t         timeout = 0;
-    struct gd32_adc *adc     = (struct gd32_adc *)(device->parent.user_data);
+    uint32_t adc_periph;
+    uint32_t timeout = 0;
+    struct gd32_adc *adc = (struct gd32_adc *)(device->parent.user_data);
 
     if (!value)
     {

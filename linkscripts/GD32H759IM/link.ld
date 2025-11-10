@@ -3,6 +3,7 @@ MEMORY
 {
   CODE(rx)      : ORIGIN = 0x08000000, LENGTH = 0x3C0000
   DATA(xrw)     : ORIGIN = 0x24000000, LENGTH = 512K
+  RAM_D2(xrw)	: ORIGIN = 0x30000000, LENGTH = 16K
   ITCMRAM(xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
   DTCMRAM(xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
 }
@@ -43,7 +44,7 @@ SECTIONS
         KEEP(*(SORT(.rti_fn*)))
         __rt_init_end = .;
         . = ALIGN(4);
-
+       
         . = ALIGN(4);
         _etext = .;
     } > CODE = 0
@@ -163,6 +164,12 @@ SECTIONS
     .debug_funcnames 0 : { *(.debug_funcnames) }
     .debug_typenames 0 : { *(.debug_typenames) }
     .debug_varnames  0 : { *(.debug_varnames) }
+    
+    .RAM_D2 (NOLOAD) : 
+    {
+    . = ABSOLUTE(0x30000000);
+    *(.ent_desc_tab_section)
+    } >RAM_D2 AT>FLASH
 }
 
  /* input sections */

@@ -151,8 +151,6 @@ void SystemInit(void)
     /* set CP10 and CP11 Full Access */
     SCB->CPACR |= (uint32_t)((0x03U << 10U * 2U) | (0x03U << 11U * 2U));
 #endif
-    SCB_EnableDCache();
-    SCB_DisableDCache();
     /* enable IRC64M */
     RCU_CTL |= RCU_CTL_IRC64MEN;
     while(0U == (RCU_CTL & RCU_CTL_IRC64MSTB)) {

@@ -37,10 +37,10 @@ typedef struct
 } DAC_INIT_STATUS;
 
 static DAC_INIT_STATUS dac_init_status[] = {
-#if defined (DAC0)
-    {DAC0, RT_FALSE},
-#elif defined (DAC1)
-    {DAC1, RT_FALSE},
+#if defined(DAC0)
+    { DAC0, RT_FALSE },
+#elif defined(DAC1)
+    { DAC1, RT_FALSE },
 #endif
 };
 
@@ -51,7 +51,7 @@ static void gd32_dac_hw_init(struct gd32_dac *gd32_dac)
     rcu_periph_enum dac_periph;
 
     /* Get pin configuration */
-    if (get_pin_config(gd32_dac->pin_name, &dac_port, &dac_pin, &dac_periph) != RT_EOK)
+    if (get_pin_config(gd32_dac->pin_name, &dac_port, &dac_pin, &dac_periph) == -RT_ERROR)
     {
         LOG_E("Failed to get pin config for %s", gd32_dac->pin_name);
         return;
@@ -199,7 +199,7 @@ static int drv_dac_init(void)
 
         /* Register DAC device */
         if (rt_hw_dac_register(&gd32_dac_obj[i].dac_device, gd32_dac_obj[i].name,
-                              &drv_ops, RT_NULL) == RT_EOK)
+                               &drv_ops, RT_NULL) == RT_EOK)
         {
             LOG_D("%s register success (channel %d)",
                   gd32_dac_obj[i].name, gd32_dac_obj[i].channel);

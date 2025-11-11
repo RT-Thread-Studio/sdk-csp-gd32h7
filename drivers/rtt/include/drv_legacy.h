@@ -18,7 +18,6 @@
 typedef size_t                          rt_size_t;      /**< Type for size number */
 typedef ssize_t                         rt_ssize_t;     /**< Used for a count of bytes or an error indication */
 #else
-typedef rt_ubase_t                      rt_size_t;      /**< Type for size number */
 typedef rt_base_t                       rt_ssize_t;     /**< Used for a count of bytes or an error indication */
 #endif /* defined(RT_USING_LIBC) && !defined(RT_USING_NANO) */
 #else
@@ -31,4 +30,3 @@ typedef rt_base_t                       rt_ssize_t;     /**< Used for a count of
 #endif /* RTTHREAD_VERSION <= RT_VERSION_CHECK(4, 1, 1) */
 
 #endif /* DRIVERS_DRV_LEGACY_H_ */
-

@@ -26,6 +26,7 @@ permissions:
 
 jobs:
   format-code:
+    if: github.repository_owner != 'RT-Thread-Studio'
     runs-on: ubuntu-latest
 
     steps:

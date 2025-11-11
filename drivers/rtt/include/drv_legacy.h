@@ -13,7 +13,7 @@
 #include <sys/types.h>
 #include "rtdef.h"
 
-#if RTTHREAD_VERSION <= RT_VERSION_CHECK(4, 1, 1)
+#if RTTHREAD_VERSION <= 40101
 #if defined(RT_USING_LIBC) && !defined(RT_USING_NANO)
 typedef size_t                          rt_size_t;      /**< Type for size number */
 typedef ssize_t                         rt_ssize_t;     /**< Used for a count of bytes or an error indication */

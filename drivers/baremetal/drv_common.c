@@ -24,7 +24,7 @@ volatile static uint32_t delay;
     \param[in]  target_freq: Target frequency
     \retval     None
 */
-void clk_init(char *clk_source, int source_freq, int target_freq)
+void clk_init()
 {
     /* setup systick timer for 1000Hz interrupts */
     if(SysTick_Config(SystemCoreClock / 1000U))
